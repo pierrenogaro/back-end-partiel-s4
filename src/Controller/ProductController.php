@@ -25,7 +25,7 @@ class ProductController extends AbstractController
         return $this->json($product);
     }
 
-    #[Route('/product/create', methods: ['POST'])]
+    #[Route('/api/product/create', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -40,7 +40,7 @@ class ProductController extends AbstractController
         return $this->json($product, 201);
     }
 
-    #[Route('/product/update/{id}', methods: ['PUT'])]
+    #[Route('/api/product/update/{id}', methods: ['PUT'])]
     public function update(Request $request, Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -53,7 +53,7 @@ class ProductController extends AbstractController
         return $this->json($product);
     }
 
-    #[Route('/product/delete/{id}', methods: ['DELETE'])]
+    #[Route('/api/product/delete/{id}', methods: ['DELETE'])]
     public function delete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $entityManager->remove($product);
