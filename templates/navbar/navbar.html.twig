@@ -12,8 +12,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if app.request.get('_route') starts with 'app_product_' %}active{% endif %}"
-                       href="{{ path('app_product_index') }}">Products</a>
+                    <a class="nav-link text-warning {% if app.request.get('_route') starts with 'app_product_' %}active{% endif %}"
+                       href="{{ path('app_product_index') }}">
+                        {% if app.user %}
+                            {{ app.user.username }}
+                        {% endif %}
+                    </a>
                 </li>
             </ul>
 

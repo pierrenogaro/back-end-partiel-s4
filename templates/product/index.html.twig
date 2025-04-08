@@ -43,37 +43,9 @@
                                         <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-outline-info" title="View details">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-outline-warning" title="Edit product">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
                                         <a href="{{ path('app_product_qrcode', {'id': product.id}) }}" class="btn btn-sm btn-outline-primary" title="View QR code">
                                             <i class="bi bi-qr-code"></i>
                                         </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ product.id }}" title="Delete product">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </div>
-
-                                    <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal{{ product.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ product.id }}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteModalLabel{{ product.id }}">Confirm deletion</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete "{{ product.name }}"?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>

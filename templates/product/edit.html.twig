@@ -6,6 +6,13 @@
     <div class="container mt-4">
         <h1 class="mb-4">Edit product</h1>
 
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_product_index') }}" class="text-decoration-none">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">edit {{ product.name }}</li>
+            </ol>
+        </nav>
+
         <div class="card shadow-sm">
             <div class="card-body">
                 <form method="post">

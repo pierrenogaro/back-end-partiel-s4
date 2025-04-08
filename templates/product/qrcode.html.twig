@@ -12,20 +12,36 @@
             </ol>
         </nav>
 
-        <div class="text-center">
-            <h1 class="mb-4">QR Code for {{ product.name }}</h1>
-
-            <div class="card mx-auto mb-4" style="max-width: 400px;">
-                <div class="card-body">
-                    <div class="mb-4">
-                        <img src="{{ qrcode }}" alt="QR Code for {{ product.name }}" class="img-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <h4 class="mb-0">QR Code for {{ product.name }}</h4>
                     </div>
+                    <div class="card-body p-4">
+                        <div class="mb-4 p-3 bg-light rounded d-flex justify-content-center">
+                            <img src="{{ qrcode }}" alt="QR Code for {{ product.name }}" class="img-fluid" style="max-width: 250px;">
+                        </div>
 
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text text-primary fw-bold">{{ product.price|number_format(2, '.', ',') }} €</p>
+                        <div class="product-info text-center mb-4">
+                            <h5 class="card-title fw-bold mb-2">{{ product.name }}</h5>
+                            <span class="badge bg-primary rounded-pill fs-5 mb-3">{{ product.price|number_format(2, '.', ',') }} €</span>
+                            {% if product.description %}
+                                <p class="card-text text-muted mt-2">{{ product.description|slice(0, 100) }}{% if product.description|length > 100 %}...{% endif %}</p>
+                            {% endif %}
+                        </div>
 
-                    <div class="d-grid gap-2">
-                        <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Back to product</a>
+                        <div class="d-grid gap-2">
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">
+                                <i class="bi bi-arrow-left-circle me-2"></i>Back to product
+                            </a>
+                            <button onclick="window.print();" class="btn btn-outline-secondary">
+                                <i class="bi bi-printer me-2"></i>Print QR Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light text-center py-3">
+                        <small class="text-muted">Scan this code to access product details</small>
                     </div>
                 </div>
             </div>
