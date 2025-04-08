@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProductController extends AbstractController
 {
-    #[Route('/api/products', name: 'api_products_list', methods: ['GET'])]
+    #[Route('/products', name: 'api_products_list', methods: ['GET'])]
     public function apiIndex(ProductRepository $productRepository): JsonResponse
     {
         $products = $productRepository->findAll();
@@ -44,7 +44,7 @@ class ProductController extends AbstractController
         return $this->json($product, 201);
     }
 
-    #[Route('/api/product/{id}', name: 'api_product_show', methods: ['GET'])]
+    #[Route('/product/{id}', name: 'api_product_show', methods: ['GET'])]
     public function apiShow(Product $product): JsonResponse
     {
         return $this->json($product);
