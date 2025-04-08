@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProductController extends AbstractController
 {
@@ -23,6 +24,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/api/product/create', name: 'api_product_create', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function apiCreate(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -49,6 +51,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/api/product/update/{id}', name: 'api_product_update', methods: ['PUT'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function apiUpdate(Request $request, Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -67,6 +70,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/api/product/delete/{id}', name: 'api_product_delete', methods: ['DELETE'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function apiDelete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
         $entityManager->remove($product);
@@ -85,6 +89,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/new', name: 'app_product_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Product();
@@ -113,6 +118,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -132,6 +138,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}/delete', name: 'app_product_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
