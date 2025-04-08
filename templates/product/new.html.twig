@@ -8,30 +8,27 @@
 
         <div class="card shadow-sm">
             <div class="card-body">
-                <form method="post">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
+                {{ form_start(form) }}
+                {{ form_row(form.name, {'label': 'Name', 'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.description, {'label': 'Description', 'attr': {'class': 'form-control', 'rows': 5}}) }}
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                <div class="mb-3">
+                    {{ form_label(form.price, 'Price') }}
+                    <div class="input-group">
+                        {{ form_widget(form.price, {'attr': {'class': 'form-control', 'step': '0.01', 'min': '0'}}) }}
+                        <span class="input-group-text">€</span>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
-                            <span class="input-group-text">€</span>
-                        </div>
-                    </div>
+                {% if form.image is defined %}
+                    {{ form_row(form.image) }}
+                {% endif %}
 
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Create product</button>
-                    </div>
-                </form>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Create product</button>
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
