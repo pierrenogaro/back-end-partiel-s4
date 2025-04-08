@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProductController extends AbstractController
 {
-    #[Route('/products', name: 'api_products_list', methods: ['GET'])]
+    #[Route('/back/products', name: 'api_products_list', methods: ['GET'])]
     public function apiIndex(ProductRepository $productRepository): JsonResponse
     {
         $products = $productRepository->findAll();
@@ -44,13 +44,13 @@ class ProductController extends AbstractController
         return $this->json($product, 201);
     }
 
-    #[Route('/product/{id}', name: 'api_product_show', methods: ['GET'])]
+    #[Route('/back/product/{id}', name: 'api_product_show', methods: ['GET'])]
     public function apiShow(Product $product): JsonResponse
     {
         return $this->json($product);
     }
 
-    #[Route('/api/product/update/{id}', name: 'api_product_update', methods: ['PUT'])]
+    #[Route('/api/back/product/update/{id}', name: 'api_product_update', methods: ['PUT'])]
     #[IsGranted('ROLE_ADMIN')]
     public function apiUpdate(Request $request, Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -69,7 +69,7 @@ class ProductController extends AbstractController
         return $this->json($product);
     }
 
-    #[Route('/api/product/delete/{id}', name: 'api_product_delete', methods: ['DELETE'])]
+    #[Route('/api/back/product/delete/{id}', name: 'api_product_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
     public function apiDelete(Product $product, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -110,10 +110,14 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show(Product $product, QrCode $qrCodeService): Response
     {
+
+        $qrcode = $qrCodeService->generateQrCodeForProduct($product);
+
         return $this->render('product/show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'qrcode' => $qrcode,
         ]);
     }
 
