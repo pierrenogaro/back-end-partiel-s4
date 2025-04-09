@@ -19,6 +19,11 @@
                         {% endif %}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if app.request.get('_route') starts with 'app_order' %}active{% endif %}" href="{{ path('app_order_index') }}">
+                        <i class="bi bi-cart me-1"></i>
+                    </a>
+                </li>
             </ul>
 
             <div class="navbar-nav">

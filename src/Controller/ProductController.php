@@ -23,7 +23,7 @@ class ProductController extends AbstractController
         return $this->json($products);
     }
 
-    #[Route('/api/product/create', name: 'api_product_create', methods: ['POST'])]
+    #[Route('/api/back/product/create', name: 'api_product_create', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function apiCreate(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
